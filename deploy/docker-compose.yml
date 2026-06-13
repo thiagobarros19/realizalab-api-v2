@@ -29,7 +29,7 @@ services:
       DB_CONNECTION: mysql
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_DATABASE: realizalab_api_v2
+      DB_DATABASE: realizalab_api
       DB_USERNAME: root
       DB_PASSWORD: "-5QdmSEt@m74$6h2"
       SESSION_DRIVER: redis
