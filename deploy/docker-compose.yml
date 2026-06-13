@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  realizalab-api:
+    restart: unless-stopped
+    container_name: realizalab-api
+    build:
+      context: ../
+      dockerfile: ./deploy/Dockerfile
+    volumes:
+        - ../storage/app:/var/www/html/storage/app
+    environment:
+      APP_NAME: Realizalab
+      APP_ENV: production
+      APP_DEBUG: false
+      APP_KEY: "base64:gndSIQr6Ov+oXoI8mA2GZmM9c8t5nU8wYybaUf3hD3Q="
+      APP_VERSION: 1.0.0
+      APP_URL: https://api.realizalab.com.br
+      APP_LOCALE: pt
+      APP_FALLBACK_LOCALE: pt
+      APP_FAKER_LOCALE: pt_BR
+      APP_MAINTENANCE_DRIVER: cache
+      APP_MAINTENANCE_STORE: database
+      BCRYPT_ROUNDS: 12
+      LOG_CHANNEL: stack
+      LOG_STACK: single
+      LOG_DEPRECATIONS_CHANNEL: null
+      LOG_LEVEL: error
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: realizalab_api_v2
+      DB_USERNAME: root
+      DB_PASSWORD: "-5QdmSEt@m74$6h2"
+      SESSION_DRIVER: redis
+      SESSION_LIFETIME: 120
+      SESSION_ENCRYPT: false
+      SESSION_PATH: /
+      SESSION_DOMAIN: null
+      BROADCAST_CONNECTION: log
+      FILESYSTEM_DISK: local
+      QUEUE_CONNECTION: redis
+      CACHE_STORE: redis
+      CACHE_PREFIX:
+      REDIS_CLIENT: predis
+      REDIS_HOST: redis
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      REDIS_PORT: 6379
+      MAIL_MAILER:
+      MAIL_HOST:
+      MAIL_PORT:
+      MAIL_USERNAME:
+      MAIL_PASSWORD:
+      MAIL_ENCRYPTION:
+      MAIL_FROM_ADDRESS:
+      MAIL_FROM_NAME:
+    ports:
+      - "8101:80"
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.realizalab-api.rule=Host(`api.realizalab.com.br`)"
+      - "traefik.http.routers.realizalab-api.tls=true"
+      - "traefik.http.routers.realizalab-api.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.realizalab-api.loadbalancer.server.port=80"
+      - "traefik.docker.network=web"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  web:
+    external: true
