@@ -42,6 +42,8 @@ return [
         'store' => 'User has been created',
         'show' => 'User has been found',
         'update' => 'User has been updated',
+        'update_password' => 'Password has been updated',
+        'reset_password' => 'Password has been reset',
         'destroy' => 'User has been deleted',
     ],
     'auth' => [

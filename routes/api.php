@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderExamController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
@@ -19,7 +18,11 @@ Route::middleware(['auth:sanctum', 'ability:refresh'])->group(function () {
 Route::middleware(['auth:sanctum', 'ability:access'])->group(function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
-    Route::get('user/me', [UserController::class, 'me']);
+    Route::prefix('user')->group(function () {
+        Route::get('me', [UserController::class, 'me']);
+        Route::put('me/password', [UserController::class, 'updatePassword']);
+        Route::put('{user}/password', [UserController::class, 'resetPassword']);
+    });
     Route::apiResource('user', UserController::class);
     Route::apiResource('exam', ExamController::class);
     Route::apiResource('partner', PartnerController::class);

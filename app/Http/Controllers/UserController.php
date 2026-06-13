@@ -6,8 +6,11 @@ use App\Actions\User\DestroyUserAction;
 use App\Actions\User\PaginateUserAction;
 use App\Actions\User\ShowUserAction;
 use App\Actions\User\StoreUserAction;
+use App\Actions\User\UpdatePasswordAction;
 use App\Actions\User\UpdateUserAction;
+use App\Http\Requests\ResetUserPasswordRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\PaginationResource;
 use App\Http\Resources\UserResource;
@@ -62,6 +65,26 @@ class UserController extends Controller
         return $this->response(
             message: __('messages.user.update'),
             data: new UserResource($result),
+        );
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request, UpdatePasswordAction $action): JsonResponse
+    {
+        $action->execute($request->user(), $request->validated('password'));
+
+        return $this->response(
+            message: __('messages.user.update_password'),
+            status: HttpResponse::HTTP_NO_CONTENT,
+        );
+    }
+
+    public function resetPassword(ResetUserPasswordRequest $request, User $user, UpdatePasswordAction $action): JsonResponse
+    {
+        $action->execute($user, $request->validated('password'));
+
+        return $this->response(
+            message: __('messages.user.reset_password'),
+            status: HttpResponse::HTTP_NO_CONTENT,
         );
     }
 
