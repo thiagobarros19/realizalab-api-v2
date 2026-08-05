@@ -1,6 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('Docker Hub login') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'DOCKER_ID_THIAGO', variable: 'DOCKERHUB_USER'),
+                    string(credentialsId: 'DOCKER_PASSWORD_THIAGO', variable: 'DOCKERHUB_TOKEN')
+                ]) {
+                    sh 'echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin'
+                }
+            }
+        }
         stage('Verify tooling') {
             steps {
                 sh '''
