@@ -38,7 +38,7 @@ pipeline {
                     ],
                     vaultSecrets: [
                         [
-                            path: "secret/data/${PROJECT}",
+                            path: "secret/${PROJECT}",
                             secretValues: [
                                 [envVar: 'APP_KEY', vaultKey: 'APP_KEY'],
                                 [envVar: 'DB_NAME', vaultKey: 'DB_NAME'],
