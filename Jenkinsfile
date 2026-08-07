@@ -58,10 +58,10 @@ DB_PASSWORD=$DB_PASSWORD
 REDIS_PASSWORD=$REDIS_PASSWORD
 EOF
                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-                        docker compose -f ./deploy/docker-compose.yml down --rmi 'local'
-                        docker compose -f ./deploy/docker-compose.yml --env-file .env build --build-arg GITHUB_TOKEN="$GITHUB_TOKEN"
-                        docker compose -f ./deploy/docker-compose.yml --env-file .env up -d
-                        docker compose -f ./deploy/docker-compose.yml ps
+                        docker-compose -f ./deploy/docker-compose.yml down --rmi 'local'
+                        docker-compose -f ./deploy/docker-compose.yml --env-file .env build --build-arg GITHUB_TOKEN="$GITHUB_TOKEN"
+                        docker-compose -f ./deploy/docker-compose.yml --env-file .env up -d
+                        docker-compose -f ./deploy/docker-compose.yml ps
                         rm -f .env
                     '''
                 }
