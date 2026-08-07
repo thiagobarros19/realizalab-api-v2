@@ -94,3 +94,9 @@ EOF
         }
     }
     post {
+        always {
+            sh 'docker builder prune -f --filter "until=168h" || true'
+            sh 'rm -f .env || true'
+        }
+    }
+}
