@@ -13,7 +13,6 @@ services:
       APP_NAME: Realizalab
       APP_ENV: production
       APP_DEBUG: false
-      APP_KEY: "base64:gndSIQr6Ov+oXoI8mA2GZmM9c8t5nU8wYybaUf3hD3Q="
       APP_VERSION: 1.0.0
       APP_URL: https://api.realizalab.com.br
       APP_LOCALE: pt
@@ -29,9 +28,6 @@ services:
       DB_CONNECTION: mysql
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_DATABASE: realizalab_api
-      DB_USERNAME: root
-      DB_PASSWORD: "-5QdmSEt@m74$6h2"
       SESSION_DRIVER: redis
       SESSION_LIFETIME: 120
       SESSION_ENCRYPT: false
@@ -45,7 +41,6 @@ services:
       CACHE_PREFIX:
       REDIS_CLIENT: predis
       REDIS_HOST: redis
-      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
       REDIS_PORT: 6379
       MAIL_MAILER:
       MAIL_HOST:
