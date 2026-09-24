@@ -18,7 +18,11 @@ class ExamFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->words(3, true),
+            'code' => strtoupper(fake()->bothify('EX-####')),
+            'cost' => fake()->randomFloat(2, 5, 50),
+            'price_sus' => fake()->randomFloat(2, 20, 100),
+            'price_particular' => fake()->randomFloat(2, 30, 150),
         ];
     }
 }

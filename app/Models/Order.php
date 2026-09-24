@@ -46,4 +46,9 @@ class Order extends Model
     {
         return $this->morphOne(Financial::class, 'financialable');
     }
+
+    public function examResults(): HasMany
+    {
+        return $this->hasMany(ExamResult::class);
+    }
 }

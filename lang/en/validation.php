@@ -178,6 +178,8 @@ return [
     |
     */
 
+    'cpf' => 'The :attribute is not a valid CPF.',
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

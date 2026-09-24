@@ -44,7 +44,12 @@ pipeline {
                                 [envVar: 'DB_DATABASE', vaultKey: 'DB_DATABASE'],
                                 [envVar: 'DB_USERNAME', vaultKey: 'DB_USERNAME'],
                                 [envVar: 'DB_PASSWORD', vaultKey: 'DB_PASSWORD'],
-                                [envVar: 'REDIS_PASSWORD', vaultKey: 'REDIS_PASSWORD']
+                                [envVar: 'REDIS_PASSWORD', vaultKey: 'REDIS_PASSWORD'],
+                                [envVar: 'AWS_ACCESS_KEY_ID', vaultKey: 'AWS_ACCESS_KEY_ID'],
+                                [envVar: 'AWS_SECRET_ACCESS_KEY', vaultKey: 'AWS_SECRET_ACCESS_KEY'],
+                                [envVar: 'AWS_DEFAULT_REGION', vaultKey: 'AWS_DEFAULT_REGION'],
+                                [envVar: 'AWS_BUCKET', vaultKey: 'AWS_BUCKET'],
+                                [envVar: 'AWS_ENDPOINT', vaultKey: 'AWS_ENDPOINT']
                             ]
                         ]
                     ]
@@ -56,6 +61,11 @@ DB_DATABASE=$DB_DATABASE
 DB_USERNAME=$DB_USERNAME
 DB_PASSWORD=$DB_PASSWORD
 REDIS_PASSWORD=$REDIS_PASSWORD
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+AWS_BUCKET=$AWS_BUCKET
+AWS_ENDPOINT=$AWS_ENDPOINT
 EOF
                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
                         docker-compose -f ./deploy/docker-compose.yml down --rmi 'local'
@@ -89,6 +99,7 @@ EOF
         stage('Clear cache') {
             steps {
                 sh 'docker exec realizalab-api php artisan config:cache'
+                sh 'docker exec realizalab-api php artisan migrate --force'
                 sh 'docker exec realizalab-api php artisan storage:link'
             }
         }

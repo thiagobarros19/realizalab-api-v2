@@ -31,6 +31,12 @@ return [
         'update' => 'Order exam has been updated',
         'destroy' => 'Order exam has been deleted',
     ],
+    'exam_result' => [
+        'store' => 'Exam result has been uploaded',
+        'release' => 'Exam result has been released to the patient',
+        'download' => 'Download link generated',
+        'destroy' => 'Exam result has been deleted',
+    ],
     'financial' => [
         'store' => 'Financial record has been created',
         'show' => 'Financial record has been found',

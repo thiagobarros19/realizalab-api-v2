@@ -35,7 +35,13 @@ services:
       SESSION_DOMAIN: null
       BROADCAST_CONNECTION: log
       CORS_ALLOWED_ORIGINS: https://realizalab.com.br
-      FILESYSTEM_DISK: local
+      FILESYSTEM_DISK: s3
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?Add AWS_ACCESS_KEY_ID to the deployment secrets}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?Add AWS_SECRET_ACCESS_KEY to the deployment secrets}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:?Add AWS_DEFAULT_REGION to the deployment secrets}
+      AWS_BUCKET: ${AWS_BUCKET:?Add AWS_BUCKET to the deployment secrets}
+      AWS_ENDPOINT: ${AWS_ENDPOINT:?Add AWS_ENDPOINT to the deployment secrets}
+      AWS_USE_PATH_STYLE_ENDPOINT: "true"
       QUEUE_CONNECTION: redis
       CACHE_STORE: redis
       CACHE_PREFIX:
