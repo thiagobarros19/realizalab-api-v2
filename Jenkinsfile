@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_ID = credentials('DOCKER_ID_THIAGO')
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD_THIAGO')
-        GITHUB_TOKEN = credentials('GITHUB_CREDS_THIAGO')
+        GITHUB_TOKEN = credentials('GITHUB_SSH_THIAGO')
         VAULT_ADDR = 'http://vault:8200'
     }
 
